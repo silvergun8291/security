@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+    wallstreet:
+      build: .
+      ports:
+        - "5333:5333"
+      volumes:
+        - ./share:/home/ctf/
+        - ./xinetd:/etc/xinetd.d/ctf
+      # devices:
+      #   - /dev/cce:/home/ctf/flag

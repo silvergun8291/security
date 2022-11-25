@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  blue_archive:
+    build:
+      context: .
+      args:
+        PORT: 8080
+        SECRET: REDACTED
+        ARCHIVE_DIR: /var/tmp/blue_archive
+        ARCHIVE_EXT: jpg
+    ports: 
+      - "8080:8080"

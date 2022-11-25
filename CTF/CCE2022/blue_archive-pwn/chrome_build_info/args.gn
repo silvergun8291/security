@@ -1,0 +1,12 @@
+# common build args
+is_debug = false
+is_component_build = false
+dcheck_always_on = false
+enable_nacl = false
+
+# v8 build args 
+v8_enable_backtrace = true
+v8_enable_disassembler = true
+v8_enable_object_print = true
+v8_enable_verify_heap = true
+v8_enable_sandbox = false

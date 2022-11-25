@@ -1,0 +1,13 @@
+diff --git a/src/builtins/builtins-array-gen.cc b/src/builtins/builtins-array-gen.cc
+index bfb248e0b2..472d246c7d 100644
+--- a/src/builtins/builtins-array-gen.cc
++++ b/src/builtins/builtins-array-gen.cc
+@@ -275,7 +275,7 @@ TF_BUILTIN(ArrayPrototypePop, CodeStubAssembler) {
+     // 2) Ensure that the length is writable.
+     EnsureArrayLengthWritable(context, LoadMap(array_receiver), &runtime);
+ 
+-    GotoIf(IntPtrEqual(length, IntPtrConstant(0)), &return_undefined);
++    // GotoIf(IntPtrEqual(length, IntPtrConstant(0)), &return_undefined);
+ 
+     // 3) Check that the elements backing store isn't copy-on-write.
+     TNode<FixedArrayBase> elements = LoadElements(array_receiver);
