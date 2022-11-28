@@ -1,8 +1,8 @@
 from pwn import *
 
-p = process("./tcache_poison")
+p = remote("host3.dreamhack.games", 23836)
 e = ELF("./tcache_poison")
-libc = ELF("/lib/x86_64-linux-gnu/libc-2.27.so")
+libc = ELF("./libc-2.27.so", checksec=False)
 
 def slog(symbol, addr): return success(symbol + ": " + hex(addr))
 

